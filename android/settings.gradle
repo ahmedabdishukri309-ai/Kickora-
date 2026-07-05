@@ -1,0 +1,41 @@
+pluginManagement {
+    def flutterSdkPath = {
+        def flutterRoot = System.env.FLUTTER_ROOT
+        if (flutterRoot) {
+            return flutterRoot
+        }
+        def flutterProperties = new File(rootDir.parentFile, '.fflutter-plugins')
+        if (flutterProperties.exists()) {
+            return flutterProperties.parentFile.absolutePath
+        }
+        throw new GradleException('Unable to locate Flutter SDK')
+    }
+
+    settings.ext.flutterSdkPath = flutterSdkPath()
+
+    includeBuild("${settings.ext.flutterSdkPath}/packages/flutter_tools/gradle")
+
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+
+plugins {
+    id "dev.flutter.flutter-gradle-plugin" version "1.0.0" apply false
+}
+
+include ":app"
+
+def localPropertiesFile = new File(rootDir, "local.properties")
+def properties = new Properties()
+
+assert localPropertiesFile.exists()
+localPropertiesFile.withReader("UTF-8") { reader -> properties.load(reader) }
+
+def flutterSdkPath = properties.getProperty("flutter.sdk")
+assert flutterSdkPath != null, "flutter.sdk not found in local.properties"
+
+def flutterRoot = file(flutterSdkPath).absoluteFile
+assert flutterRoot.isDirectory(), "flutter.sdk $flutterSdkPath not found"

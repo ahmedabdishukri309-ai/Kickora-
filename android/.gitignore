@@ -1,0 +1,14 @@
+# This file should *not* be checked into version control.
+#
+# Instead, use the `flutter pub get` command to regenerate this file.
+#
+# Avoid checking in the pubspec.lock file. However, in rare cases you may want to
+# check this in if you have a divergent dependency tree and want to control the
+# exact versions of all your dependencies. For more info see
+# https://dart.dev/guides/libraries/private-files#pubspeclock
+#
+# Packages used by Flutter are now retrieved in the `flutter` tool, not pub.
+# See https://flutter.dev/development/packages-and-plugins/using-packages.
+
+env.properties
+local.properties
