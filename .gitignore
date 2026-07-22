@@ -92,3 +92,7 @@ coverage/
 *.p12
 *.keystore
 *.jks
+
+.env
+.env.*
+!.env.example
